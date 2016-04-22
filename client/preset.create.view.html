@@ -1,0 +1,153 @@
+<style>
+.vertical-sliders {
+    margin: 0;
+}
+.vertical-sliders > div {
+    display: inline-block;
+    height: 200px;
+    margin: 0 2em;
+}
+.band {
+    display: inline-block;
+}
+.scroll-gap{
+    margin: 4em 0;
+}
+</style>
+<div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+        <h3> Name: <input class="form-control" ng-model="preset.name" /></h3>
+        <div class="pull-right">
+            <button type="button" class="btn btn-sm btn-success" ng-click="save()">Save</button>
+        </div>
+        <div>
+            Type:
+            <select ng-model="preset.type">
+              <option value="EQUALIZER">EQUALIZER</option>
+              <option value="COMPRESSOR">COMPRESSOR</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
+<div class="row" ng-if="preset.type === 'EQUALIZER'">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+        <table class="table table-condensed">
+            <tr>
+                <td>Low Band <input type="checkbox" ng-model="preset.properties.low_band"></td>
+                <td>Low Mid Band <input type="checkbox" ng-model="preset.properties.low_mid_band"></td>
+            </tr>
+            <tr>
+                <td>Hi Mid Band <input type="checkbox" ng-model="preset.properties.hi_mid_band"></td>
+                <td>Hi Band <input type="checkbox" ng-model="preset.properties.hi_band"></td>
+            </tr>
+        </table>
+
+        <div class="band" ng-if="preset.properties.low_band">
+            Low Peak/Shelf:
+            <select ng-model="preset.properties.low_peak_shelf">
+              <option value="peak">peak</option>
+              <option value="shelf">shelf</option>
+            </select>
+            <div class="vertical-sliders">
+                <div>
+                    <rzslider rz-slider-model="preset.properties.low_freq" rz-slider-options="hzSlider"></rzslider>
+                    <p>Frequency</p>
+                </div>
+                <div>
+                    <rzslider rz-slider-model="preset.properties.low_gain" rz-slider-options="hzSlider"></rzslider>
+                    <p>Gain</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="band" ng-if="preset.properties.low_mid_band">
+            Low Mid Hi Low Q:
+            <select ng-model="preset.properties.low_mid_hi_low_q">
+              <option value="hi">hi</option>
+              <option value="mid">mid</option>
+              <option value="low">low</option>
+              <option value="lowq">lowq</option>
+            </select>
+            <div class="vertical-sliders">
+                <div>
+                    <rzslider rz-slider-model="preset.properties.low_mid_freq" rz-slider-options="hzSlider"></rzslider>
+                    <p>Frequency</p>
+                </div>
+                <div>
+                    <rzslider rz-slider-model="preset.properties.low_mid_gain" rz-slider-options="hzSlider"></rzslider>
+                    <p>Gain</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="band" ng-if="preset.properties.hi_mid_band">
+            <div class="vertical-sliders">
+                <div>
+                    <rzslider rz-slider-model="preset.properties.hi_mid_freq" rz-slider-options="hzSlider"></rzslider>
+                    <p>Frequency</p>
+                </div>
+                <div>
+                    <rzslider rz-slider-model="preset.properties.hi_mid_gain" rz-slider-options="hzSlider"></rzslider>
+                    <p>Gain</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="band" ng-if="preset.properties.hi_band">
+            Hi Peak/Shelf:
+            <select ng-model="preset.properties.hi_peak_shelf">
+              <option value="peak">peak</option>
+              <option value="shelf">shelf</option>
+            </select>
+            <div class="vertical-sliders" ng-if="preset.properties.hi_band">
+                <div>
+                    <rzslider rz-slider-model="preset.properties.hi_freq" rz-slider-options="hzSlider"></rzslider>
+                    <p>Frequency</p>
+                </div>
+                <div>
+                    <rzslider rz-slider-model="preset.properties.hi_gain" rz-slider-options="hzSlider"></rzslider>
+                    <p>Gain</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
+<div class="row" ng-if="preset.type === 'COMPRESSOR'">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+        Mode:
+        <select ng-model="preset.properties.mode">
+          <option value="creative">creative</option>
+          <option value="strict">strict</option>
+        </select>
+        <div class="vertical-sliders">
+            <div>
+                <rzslider rz-slider-model="preset.properties.threshold" rz-slider-options="dbSlider"></rzslider>
+                <p>Threshold</p>
+            </div>
+            <div>
+                <rzslider rz-slider-model="preset.properties.presence" rz-slider-options="dbSlider"></rzslider>
+                <p>Presence</p>
+            </div>
+            <div>
+                <rzslider rz-slider-model="preset.properties.make_up" rz-slider-options="dbSlider"></rzslider>
+                <p>Make Up</p>
+            </div>
+            <div>
+                <rzslider rz-slider-model="preset.properties.release" rz-slider-options="hzSlider"></rzslider>
+                <p>Release</p>
+            </div>
+            <div>
+                <rzslider rz-slider-model="preset.properties.attack" rz-slider-options="hzSlider"></rzslider>
+                <p>Attack</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
+
+<div class="scroll-gap"></div>

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+        <table class="table animated">
+            <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Type </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="preset in presets track by $index" ng-if="$index <= 10">
+                    <td>
+                        <a href="" ui-sref="preset({ id: preset._id })" > {{ preset.name }} </a>
+                    </td>
+                    <td> {{ preset.type }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
