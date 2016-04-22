@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var dbURI = process.env.MONGO_URI;
+var dbURI = process.env.MONGODB_URI;
 
 module.exports = {
     connect: connect
